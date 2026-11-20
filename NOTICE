@@ -1,0 +1,46 @@
+meshfs-dokan
+============
+
+A port of the user-mode protocol of Dokany's dokan2.dll (Dokany v2.3.1.1000,
+https://github.com/dokan-dev/dokany, tag v2.3.1.1000) to Rust, built as the
+separate, replaceable library meshfs_dokan.dll behind a versioned C ABI
+(include/meshfs_dokan.h).
+
+Copyright (C) 2026 Harland Consulting (Russell Harland)
+
+This library is free software; you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License as published by the Free
+Software Foundation; either version 3 of the License, or (at your option) any
+later version. See COPYING.LESSER and COPYING.
+
+This library is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+Ported from Dokany
+------------------
+
+The driver structures, constants and IOCTL codes (src/proto.rs) are ported from
+Dokany's sys/public.h. The protocol and marshalling logic (src/marshal/,
+src/win/) is ported from Dokany's user-mode library dokan2.dll (dokan/dokan.c,
+create.c, directory.c, fileinfo.c, setfile.c, volume.c, security.c, read.c,
+write.c, cleanup.c, close.c, flush.c, lock.c, timeout.c, access.c, mount.c).
+Those files carry these notices:
+
+  Dokan : user-mode file system library for Windows
+
+  Copyright (C) 2020 - 2025 Google, Inc.
+  Copyright (C) 2017 - 2025 Google, Inc.
+  Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
+  Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
+
+  http://dokan-dev.github.io
+
+  This program is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by the
+  Free Software Foundation; either version 3 of the License, or (at your
+  option) any later version.
+
+The Dokany driver (dokan2.sys) is not part of this library. It is installed
+unmodified from Dokany's signed MSI and is never modified, rebuilt or
+re-signed.
